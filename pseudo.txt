@@ -1,0 +1,10 @@
+When a user opens the program
+Initialize two variables for user score and computer score
+Show a prompt asking to pick between "rock", "paper", or "scissors"
+Store the user's input
+Get the random value from the list above as a "computer pick"
+Via if-else statements, get to know who won the round
+Update the score variables accordingly
+Notify the user on the results of the round
+If it was the fifth round, conclude the game
+If not, start the next round
