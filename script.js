@@ -84,8 +84,10 @@ function playGame () {
             `);
     if (computerScore > userScore) {
         console.log("The computer has won.")
-    } else {
+    } else if (userScore > computerScore) {
         console.log("You have won the battle!")
+    } else {
+        console.log("It's a tie!")
     }
 }
 
