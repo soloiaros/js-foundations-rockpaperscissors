@@ -62,33 +62,6 @@ function playGame () {
             }
         };
     }
-
-    let roundsPlayed = 0;
-
-    while (roundsPlayed < 5) {
-        console.log(`
-            Current score:\n
-            User: ${userScore}\n
-            Computer: ${computerScore}
-            `);
-        
-        playRound();
-            
-        roundsPlayed += 1;
-    }
-
-    console.log(`
-            Current score:\n
-            User: ${userScore}\n
-            Computer: ${computerScore}
-            `);
-    if (computerScore > userScore) {
-        console.log("The computer has won.")
-    } else if (userScore > computerScore) {
-        console.log("You have won the battle!")
-    } else {
-        console.log("It's a tie!")
-    }
 }
 
 playGame();

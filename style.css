@@ -1,0 +1,47 @@
+.container {
+    display: flex;
+    width: 100vw;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    width: 80vw;
+    max-width: 800px;
+    justify-content: space-evenly;
+    background-color: lightgray;
+    gap: 16px;
+    height: 4rem;
+    align-items: center;
+    border: 2px solid #000;
+    border-radius: 6px;
+    padding: 1rem 0.5rem;
+}
+
+.buttons > button {
+    flex: 1 1 100px;
+    border: 1px solid;
+    border-radius: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #fff;
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+
+#rock-btn {
+    background-color: darkgray;
+    border-color: black;
+}
+
+#paper-btn {
+    background-color: white;
+    color: black;
+    border-color: lightblue;
+}
+
+#scissors-btn {
+    background-color: darkred;
+    border-color: lightcoral;
+}
