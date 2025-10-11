@@ -66,6 +66,7 @@
     border-radius: 6px;
     height: 5rem;
     aspect-ratio: 1 / 1;
+    transition: 0.1s;
 }
 
 .score-block {
@@ -80,4 +81,8 @@
     aspect-ratio: 1 / 1;
     max-width: 150px;
     justify-content: space-evenly;
+}
+
+.tie {
+    color: red;
 }

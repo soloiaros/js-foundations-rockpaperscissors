@@ -12,11 +12,26 @@
 let userScore = 0;
 let computerScore = 0;
 
-const buttons = document.getElementsByClassName('button');
-Array(buttons).forEach(actionBtn => {
+let gameRules = {
+  "rock": "scissors",
+  "paper": "rock",
+  "scissors": "paper"
+}
+
+const buttons = document.getElementsByTagName('button');
+Array.from(buttons).forEach(function(actionBtn) {
   actionBtn.addEventListener(
     'click', 
-    playRound(actionBtn.getAttribute('data-choice')))
+    playRound
+  );
+});
+
+const scoreWindows = document.getElementsByClassName('score-window');
+Array.from(scoreWindows).forEach(function(scoreWindow) {
+  scoreWindow.addEventListener(
+    'transitionend', 
+    () => scoreWindow.classList.remove('tie')
+  );
 });
 
 function getComputerChoice () {
@@ -26,45 +41,49 @@ function getComputerChoice () {
     return computerChoice;
 }
 
-function playRound (userChoice) {
-    let computerChoice = getComputerChoice();
-
-    console.log(`Your pick is ${userChoice}`)
-    console.log(`Computer' pick is ${computerChoice}`)
-
-    if (userChoice === "rock") {
-        if (computerChoice === "rock") {
-            userScore += 1;
-            computerScore += 1;
-        } else if (computerChoice === "paper") {
-            computerScore += 1;
-        } else {
-            userScore += 1;
-        }
-    } else if (userChoice === "paper") {
-        if (computerChoice === "rock") {
-            userScore += 1;
-        } else if (computerChoice === "paper") {
-            computerScore += 1;
-            userScore += 1;
-        } else {
-            computerScore += 1;
-        }
-    } else {
-        if (computerChoice === "rock") {
-            computerScore += 1;
-        } else if (computerChoice === "paper") {
-            userScore += 1;
-        } else {
-            userScore += 1;
-            computerScore += 1;
-        }
-    };
+function displayTieAnimation () {
+  const scoreWindows = document.getElementsByClassName('score-window');
+  for (let scoreWindow of scoreWindows) {
+    scoreWindow.classList.add('tie')
   }
-
-function playGame () {
-
-    
 }
 
-playGame();
+function playRound () {
+  let userChoice = this.getAttribute('data-choice');
+  let computerChoice = getComputerChoice();
+
+  userChoice === computerChoice ? displayTieAnimation() 
+    : computerChoice === gameRules[userChoice] ? userScore++
+    : computerScore++
+
+  const userScoreWindow = document.querySelector('#user-score');
+  const computerScoreWindow = document.querySelector('#computer-score');
+  userScoreWindow.innerText = userScore;
+  computerScoreWindow.innerText = computerScore;
+
+  if (userScore >= 5 || computerScore >= 5) {
+    Array.from(buttons).forEach(button => button.disabled = true);
+    
+    const winnerText = document.createElement('p');
+    winnerText.style['font-size'] = '48px';
+    
+    userScore >= 5 ? winnerText.innerText = `You're a champion!` : winnerText.innerText = `The robot outplayed you!`;
+    userScore >= 5 ? winnerText.style['color'] = 'green' : winnerText.style['color'] = 'red';
+    
+    const resetButton = document.createElement('button');
+    resetButton.textContent = 'Start over?';
+    
+    const container = document.querySelector('.container');
+    container.appendChild(winnerText);
+    container.appendChild(resetButton);
+    
+    resetButton.addEventListener('click', () => {
+      container.removeChild(winnerText);
+      container.removeChild(resetButton);
+      [userScore, computerScore] = [0, 0];
+      userScoreWindow.innerText = userScore;
+      computerScoreWindow.innerText = computerScore;
+      Array.from(buttons).forEach(button => button.disabled = false);
+    })
+  }
+}
