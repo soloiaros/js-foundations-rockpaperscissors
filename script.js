@@ -12,10 +12,12 @@
 let userScore = 0;
 let computerScore = 0;
 
-function getUserChoice () {
-    const userChoice = prompt("Make a choice between Rock, Paper, or Scissors!").toLowerCase();
-    return userChoice;
-}
+const buttons = document.getElementsByClassName('button');
+Array(buttons).forEach(actionBtn => {
+  actionBtn.addEventListener(
+    'click', 
+    playRound(actionBtn.getAttribute('data-choice')))
+});
 
 function getComputerChoice () {
     const randomValue = Math.random();
@@ -24,44 +26,45 @@ function getComputerChoice () {
     return computerChoice;
 }
 
+function playRound (userChoice) {
+    let computerChoice = getComputerChoice();
+
+    console.log(`Your pick is ${userChoice}`)
+    console.log(`Computer' pick is ${computerChoice}`)
+
+    if (userChoice === "rock") {
+        if (computerChoice === "rock") {
+            userScore += 1;
+            computerScore += 1;
+        } else if (computerChoice === "paper") {
+            computerScore += 1;
+        } else {
+            userScore += 1;
+        }
+    } else if (userChoice === "paper") {
+        if (computerChoice === "rock") {
+            userScore += 1;
+        } else if (computerChoice === "paper") {
+            computerScore += 1;
+            userScore += 1;
+        } else {
+            computerScore += 1;
+        }
+    } else {
+        if (computerChoice === "rock") {
+            computerScore += 1;
+        } else if (computerChoice === "paper") {
+            userScore += 1;
+        } else {
+            userScore += 1;
+            computerScore += 1;
+        }
+    };
+  }
+
 function playGame () {
 
-    function playRound () {
-        let userChoice = getUserChoice();
-        let computerChoice = getComputerChoice();
-
-        console.log(`Your pick is ${userChoice}`)
-        console.log(`Computer' pick is ${computerChoice}`)
-
-        if (userChoice === "rock") {
-            if (computerChoice === "rock") {
-                userScore += 1;
-                computerScore += 1;
-            } else if (computerChoice === "paper") {
-                computerScore += 1;
-            } else {
-                userScore += 1;
-            }
-        } else if (userChoice === "paper") {
-            if (computerChoice === "rock") {
-                userScore += 1;
-            } else if (computerChoice === "paper") {
-                computerScore += 1;
-                userScore += 1;
-            } else {
-                computerScore += 1;
-            }
-        } else {
-            if (computerChoice === "rock") {
-                computerScore += 1;
-            } else if (computerChoice === "paper") {
-                userScore += 1;
-            } else {
-                userScore += 1;
-                computerScore += 1;
-            }
-        };
-    }
+    
 }
 
 playGame();
