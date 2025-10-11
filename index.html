@@ -9,9 +9,19 @@
 <body>
     <div class="container">
         <div class="buttons">
-            <button data-choice="rock">Rock</button>
-            <button data-choice="paper">Paper</button>
-            <button data-choice="scissors">Scissors</button>
+            <button data-choice="rock" id="rock-btn">Rock</button>
+            <button data-choice="paper" id="paper-btn">Paper</button>
+            <button data-choice="scissors" id="scissors-btn">Scissors</button>
+        </div>
+        <div class="results">
+            <div class="score-block">
+                <label for="user-score">Your score</label>
+                <div id="user-score">0</div>
+            </div>
+            <div class="score-block">
+                <label for="computer-score">Computer's score</label>
+                <div id="computer-score">0</div>
+            </div>
         </div>
     </div>
     <script src="script.js"></script>
